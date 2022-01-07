@@ -11,10 +11,10 @@
 - Select Development Environment
 > Note: The file backend/credentials.json shold be writable
 
-Action used to render the form:
+Action used to render the table:
 
 Controller: `backend\controllers\SiteController` Action: `indexAction`
 
-The core code is inside component
+The core code is inside this component
 
 `backend\components\GoogleDriveClient`
