@@ -4,8 +4,6 @@ namespace backend\controllers;
 
 use common\models\LoginForm;
 use Yii;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -14,34 +12,6 @@ use yii\web\Response;
  */
 class SiteController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['login', 'error'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout', 'index'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * {@inheritdoc}
@@ -62,7 +32,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        try {
+            $files = Yii::$app->google_drive->listFiles();
+        } catch (\Throwable $th) {
+            $files = [];
+        }
+        return $this->render('index', ['files' => $files]);
     }
 
     /**

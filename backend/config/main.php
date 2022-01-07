@@ -37,6 +37,9 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'google_drive' => [
+            'class' => 'backend\components\GoogleDriveClient'
+        ]
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
