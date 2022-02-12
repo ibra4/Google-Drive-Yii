@@ -32,12 +32,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        try {
-            $files = Yii::$app->google_drive->listFiles();
-        } catch (\Throwable $th) {
-            $files = [];
-        }
-        return $this->render('index', ['files' => $files]);
+        return $this->render('index');
     }
 
     /**
